@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequestMapping("/journal")
 public class JournalEntryController {
 
-
     @Autowired
     private JournalEntryService journalEntryService;
 
