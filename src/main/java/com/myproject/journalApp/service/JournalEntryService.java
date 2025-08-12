@@ -34,6 +34,15 @@ public class JournalEntryService {
         }
     }
 
+    public void saveEntry(JournalEntry journalEntry) {
+        try {
+            journalEntryRepository.save(journalEntry);
+        } catch (Exception e) {
+            log.error("Exception", e);
+        }
+    }
+
+
     public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
