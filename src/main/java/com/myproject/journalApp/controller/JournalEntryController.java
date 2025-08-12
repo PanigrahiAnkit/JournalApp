@@ -57,9 +57,10 @@ public class JournalEntryController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("id/{myID}")
-    public ResponseEntity<?> deleteJournalEntryById(@PathVariable ObjectId myID) { // ?: Refers to wildcard entry
-        journalEntryService.deleteById(myID);
+    @DeleteMapping("id/{userName}/{myID}")
+    public ResponseEntity<?> deleteJournalEntryById(@PathVariable ObjectId myID, @PathVariable String userName) { // ?: Refers
+        // to wildcard entry
+        journalEntryService.deleteById(myID, userName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
