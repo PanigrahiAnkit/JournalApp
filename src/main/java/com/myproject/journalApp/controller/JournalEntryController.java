@@ -26,7 +26,7 @@ public class JournalEntryController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userName}")
+    @GetMapping("{userName}")
     public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String userName) { // localhost:8080/journal GET
         User user = userService.findByUserName(userName);
         List<JournalEntry> all = user.getJournalEntries();
