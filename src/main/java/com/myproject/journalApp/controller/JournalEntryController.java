@@ -80,23 +80,28 @@ public class JournalEntryController {
         }
     }
 
-    @PutMapping("/id/{userName}/{myID}")
+    @PutMapping("/id/{myID}")
     public ResponseEntity<?> updateJournalById(
             @PathVariable ObjectId myID,
-            @RequestBody JournalEntry newEntry,
-            @PathVariable String userName
+            @RequestBody JournalEntry newEntry
     ) {
-        JournalEntry old = journalEntryService.findByID(myID).orElse(null);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByUserName(userName);
+        List<JournalEntry>collect = user.getJournalEntries().stream().filter(x -> x.getId().equals(myID)).collect(Collectors.toList());
+        if(!collect.isEmpty()) {
+            Optional<JournalEntry> journalEntry = journalEntryService.findByID(myID); // Introduced a variable using Ctrl+Alt+V
+            if(journalEntry.isPresent()) {
+                JournalEntry old = journalEntry.get();
+                old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() : old.getTitle());
+                old.setContent(newEntry.getContent() != null && !newEntry.getContent().isEmpty() ? newEntry.getContent() : old.getContent());
 
-        if(old != null) {
-            old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().isEmpty() ? newEntry.getTitle() :
-                    old.getTitle());
-            old.setContent(newEntry.getContent() != null && !newEntry.getContent().isEmpty() ? newEntry.getContent() :
-                    old.getContent());
-
-            journalEntryService.saveEntry(old);
-            return new ResponseEntity<>(old, HttpStatus.OK);
+                journalEntryService.saveEntry(old);
+                return new ResponseEntity<>(old, HttpStatus.OK);
+            }
         }
+
+        JournalEntry old = journalEntryService.findByID(myID).orElse(null);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
