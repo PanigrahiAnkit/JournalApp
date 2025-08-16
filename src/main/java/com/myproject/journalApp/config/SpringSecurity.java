@@ -28,7 +28,7 @@ public class SpringSecurity {
         return http.authorizeHttpRequests(request -> request
 //                        .requestMatchers("/public/**").permitAll() // ** represents wild card patterns
                         .requestMatchers("/journal/**", "/user/**").authenticated()
-//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                        .anyRequest().authenticated()
                         .anyRequest().permitAll()
                 )
