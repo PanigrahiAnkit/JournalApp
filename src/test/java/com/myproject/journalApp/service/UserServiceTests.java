@@ -42,7 +42,7 @@ public class UserServiceTests {
     @ParameterizedTest
     @ArgumentsSource(UserArgumentsProvider.class)
     public void testCustomFindByUserName(User user) {
-        assertNotNull(userRepository.findByUserName("Banu"));
+        assertTrue(userService.saveNewUser(user));
     }
 
     @Disabled
