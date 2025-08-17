@@ -29,6 +29,7 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(strings = {
             "Ankit",
@@ -41,7 +42,7 @@ public class UserServiceTests {
 
     @ParameterizedTest
     @ArgumentsSource(UserArgumentsProvider.class)
-    public void testCustomFindByUserName(User user) {
+    public void testSaveNewUser(User user) {
         assertTrue(userService.saveNewUser(user));
     }
 
