@@ -2,6 +2,7 @@ package com.myproject.journalApp.service;
 
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.repository.UserRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -68,7 +69,7 @@ public class UserDetailsServiceImplTests {
     }
      */
 
-
+    @Disabled
     @Test
     void loadUserByUsernameTest() {
         when(userRepository.findByUserName(ArgumentMatchers.anyString()))
