@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Journal Application
+
+  data:
+    mongodb:
+      uri: mongodb+srv://AnkitAtlas:Learning2025@cluster0.yi12oix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: journaldb
+      auto-index-creation: true
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /journal
