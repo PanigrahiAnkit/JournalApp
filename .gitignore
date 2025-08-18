@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore all logs written to the logs/ directory (recommended)
+logs/
