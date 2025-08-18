@@ -4,6 +4,8 @@ import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +24,9 @@ public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+//    private static final Logger logger = LoggerFactory.getLogger(UserService.class); // If we use @Slf4j no need to
+    // use this instance
+
     public void saveUser(User user) {
         userRepository.save(user);
     }
@@ -33,6 +38,13 @@ public class UserService {
             userRepository.save(user);
             return true;
         } catch (Exception e) {
+//            logger.info("Oh ho... Fat gaya code...");
+//            logger.info("Error occured for {}", user.getUserName(), e);
+            log.error("Error occured for {}", user.getUserName(), e); // When we use @Slf4j we use log.error not logger
+            log.warn("Just a Demo Warning log");
+            log.info("Just a Demo Info log");
+            log.debug("Just a Demo debug log");
+            log.trace("Just a Demo trace log");
             return false;
         }
     }
