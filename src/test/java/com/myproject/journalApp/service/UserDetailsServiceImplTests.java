@@ -47,40 +47,40 @@ import static org.mockito.Mockito.*;
  * use the MockitoExtension which initializes mocks automatically.
 */
 
-@ExtendWith(MockitoExtension.class)
-public class UserDetailsServiceImplTests {
-
-    @InjectMocks
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Mock
-    private UserRepository userRepository;
-
-    /*
-    * This can also be used, if not, using @ExtendUsing(MockitoExtension.class)
-    @BeforeEach
-    void setUp() {
-        closeable = MockitoAnnotations.openMocks(this);
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-        closeable.close();
-    }
-     */
-
-    @Disabled
-    @Test
-    void loadUserByUsernameTest() {
-        when(userRepository.findByUserName(ArgumentMatchers.anyString()))
-                .thenReturn(User.builder()
-                        .userName("Ankit")
-                        .password("aasassa")
-                        .roles(new ArrayList<>())
-                        .build());
-
-        UserDetails user = userDetailsService.loadUserByUsername("Ankit");
-        assertThat(user).isNotNull();
-
-    }
-}
+//@ExtendWith(MockitoExtension.class)
+//public class UserDetailsServiceImplTests {
+//
+//    @InjectMocks
+//    private UserDetailsServiceImpl userDetailsService;
+//
+//    @Mock
+//    private UserRepository userRepository;
+//
+//    /*
+//    * This can also be used, if not, using @ExtendUsing(MockitoExtension.class)
+//    @BeforeEach
+//    void setUp() {
+//        closeable = MockitoAnnotations.openMocks(this);
+//    }
+//
+//    @AfterEach
+//    void tearDown() throws Exception {
+//        closeable.close();
+//    }
+//     */
+//
+//    @Disabled
+//    @Test
+//    void loadUserByUsernameTest() {
+//        when(userRepository.findByUserName(ArgumentMatchers.anyString()))
+//                .thenReturn(User.builder()
+//                        .userName("Ankit")
+//                        .password("aasassa")
+//                        .roles(new ArrayList<>())
+//                        .build());
+//
+//        UserDetails user = userDetailsService.loadUserByUsername("Ankit");
+//        assertThat(user).isNotNull();
+//
+//    }
+//}
