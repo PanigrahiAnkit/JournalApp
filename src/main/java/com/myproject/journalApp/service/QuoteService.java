@@ -19,7 +19,7 @@ public class QuoteService {
 
     public QuoteResponse getQuote() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Api-Key", apiKey);
+        headers.set("X-Api-Key", apiKey); // key-value pair
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(

@@ -63,5 +63,3 @@ public class UserController {
         return new ResponseEntity<>(greeting, HttpStatus.OK);
     }
 }
-
-//Hello
