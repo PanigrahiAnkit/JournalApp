@@ -1,8 +1,11 @@
 package com.myproject.journalApp.controller;
 
+import com.myproject.journalApp.api.response.WeatherResponse;
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.repository.UserRepository;
 import com.myproject.journalApp.service.UserService;
+import com.myproject.journalApp.service.WeatherService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
@@ -20,6 +24,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private final WeatherService weatherService;
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
@@ -42,6 +48,11 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> greeting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<>("Hi " + authentication.getName(), HttpStatus.OK) ;
+        WeatherResponse weatherResponse = weatherService.getWeather("Bhubaneswar");
+        String greeting = "";
+        if (weatherResponse != null) {
+            greeting = ", Weather feels like " + weatherResponse.getCurrent().getFeelslike() + " degree Celsius";
+        }
+        return new ResponseEntity<>("Hi " + authentication.getName() + greeting, HttpStatus.OK);
     }
 }
