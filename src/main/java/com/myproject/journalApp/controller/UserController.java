@@ -1,8 +1,10 @@
 package com.myproject.journalApp.controller;
 
+import com.myproject.journalApp.api.response.QuoteResponse;
 import com.myproject.journalApp.api.response.WeatherResponse;
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.repository.UserRepository;
+import com.myproject.journalApp.service.QuoteService;
 import com.myproject.journalApp.service.UserService;
 import com.myproject.journalApp.service.WeatherService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class UserController {
     private UserRepository userRepository;
 
     private final WeatherService weatherService;
+    private final QuoteService quoteService;
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
@@ -49,10 +52,14 @@ public class UserController {
     public ResponseEntity<?> greeting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         WeatherResponse weatherResponse = weatherService.getWeather("Bhubaneswar");
-        String greeting = "";
+        String greeting = "Hi " + authentication.getName();
         if (weatherResponse != null) {
-            greeting = ", Weather feels like " + weatherResponse.getCurrent().getFeelslike() + " degree Celsius";
+            greeting += ", Weather feels like " + weatherResponse.getCurrent().getFeelslike() + " degree Celsius. \n";
         }
-        return new ResponseEntity<>("Hi " + authentication.getName() + greeting, HttpStatus.OK);
+        QuoteResponse quote = quoteService.getQuote();
+        if (quote != null) {
+            greeting += "Quote of the day: \"" + quote.getQuote() + "\" - " + quote.getAuthor();
+        }
+        return new ResponseEntity<>(greeting, HttpStatus.OK);
     }
 }
