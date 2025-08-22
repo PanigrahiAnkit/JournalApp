@@ -1,8 +1,8 @@
 package com.myproject.journalApp.service;
 
 import com.myproject.journalApp.api.response.WeatherResponse;
+import com.myproject.journalApp.cache.AppCache;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,16 @@ public class WeatherService {
     @Value("${weather.api.key}")
     private String apiKey;
 
-    private static final String API = "http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
-
     private final RestTemplate restTemplate;
 
+    private final AppCache appCache;
+
     public WeatherResponse getWeather(String city) {
-        String finalAPI = API
-                .replace("CITY", city)
-                .replace("API_KEY", apiKey);
+        String finalAPI = appCache
+                .appCache
+                .get(AppCache.keys.WEATHER_API.toString())
+                .replace("<city>", city)
+                .replace("<apiKey>", apiKey);
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null,
                 WeatherResponse.class);
         if (response.getStatusCode() != HttpStatus.OK) {
