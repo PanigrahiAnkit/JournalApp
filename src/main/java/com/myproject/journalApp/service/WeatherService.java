@@ -2,6 +2,7 @@ package com.myproject.journalApp.service;
 
 import com.myproject.journalApp.api.response.WeatherResponse;
 import com.myproject.journalApp.cache.AppCache;
+import com.myproject.journalApp.constants.Placeholders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -25,8 +26,8 @@ public class WeatherService {
         String finalAPI = appCache
                 .appCache
                 .get(AppCache.keys.WEATHER_API.toString())
-                .replace("<city>", city)
-                .replace("<apiKey>", apiKey);
+                .replace(Placeholders.CITY, city)
+                .replace(Placeholders.API_KEY, apiKey);
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null,
                 WeatherResponse.class);
         if (response.getStatusCode() != HttpStatus.OK) {
