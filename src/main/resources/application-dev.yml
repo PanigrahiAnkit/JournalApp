@@ -19,3 +19,7 @@ server:
 weather:
   api:
     key: ad7e47c5c483879c017c178f2722e8c9
+
+quote:
+  api:
+    key: TZtQ3OBbGVTRdjlxrop/Nw==e2h22ZbnEQJ6AG3Q

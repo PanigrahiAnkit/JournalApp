@@ -2,8 +2,8 @@ package com.myproject.journalApp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myproject.journalApp.api.response.QuoteResponse;
-import com.myproject.journalApp.api.response.WeatherResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +12,8 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class QuoteService {
 
-    private static final String apiKey = "TZtQ3OBbGVTRdjlxrop/Nw==e2h22ZbnEQJ6AG3Q";
+    @Value("${quote.api.key}")
+    private String apiKey;
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper = new ObjectMapper();  // Here Object Mapper has been used instead of
     // Deserialisation
