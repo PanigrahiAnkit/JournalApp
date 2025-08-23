@@ -48,6 +48,5 @@ public class QuoteService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse quote response", e);
         }
-
     }
 }
