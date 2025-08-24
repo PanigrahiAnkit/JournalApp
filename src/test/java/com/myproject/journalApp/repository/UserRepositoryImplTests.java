@@ -1,0 +1,8 @@
+package com.myproject.journalApp.repository;
+
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class UserRepositoryImplTests {
+
+}
