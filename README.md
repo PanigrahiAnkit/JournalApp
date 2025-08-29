@@ -1,4 +1,4 @@
-# Journal Application
+# Secure Journal Application
 
 A secure, end-to-end encrypted (E2EE) Journal App built using Spring Boot and MongoDB.
 
