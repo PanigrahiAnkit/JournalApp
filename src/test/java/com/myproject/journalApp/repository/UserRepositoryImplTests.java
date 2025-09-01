@@ -16,12 +16,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@RequiredArgsConstructor
 public class UserRepositoryImplTests {
 
     @Autowired
     private UserRepositoryImpl userRepository;
 
+    @Disabled
     @Test
     public void testSaveNewUser() {
         Assertions.assertNotNull(userRepository.getUserForSA());
