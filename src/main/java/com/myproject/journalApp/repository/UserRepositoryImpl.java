@@ -18,9 +18,19 @@ public class UserRepositoryImpl {
     public List<User> getUserForSA() {
         Query query = new Query();
 
+        // By default these two below will be considered as AND criterias
         query.addCriteria(Criteria.where("email").exists(true));
+        query.addCriteria(Criteria.where("email").ne(null).ne(""));
+        query.addCriteria(Criteria.where("sentimentAnalysis").is(true));
 
-        List<User> users = mongoTemplate.find(query, User.class);
-        return users;
+
+        // And this can be used for OR or AND condition in this way as well
+        Criteria criteria = new Criteria();
+        query.addCriteria(criteria.orOperator(
+                Criteria.where("email").exists(true),
+                Criteria.where("sentimentAnalysis").is(true)
+        ));
+
+        return mongoTemplate.find(query, User.class);
     }
 }
