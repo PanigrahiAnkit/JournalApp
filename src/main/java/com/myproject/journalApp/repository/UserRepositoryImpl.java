@@ -19,18 +19,20 @@ public class UserRepositoryImpl {
         Query query = new Query();
 
         // By default these two below will be considered as AND criterias
-        query.addCriteria(Criteria.where("email").exists(true));
-        query.addCriteria(Criteria.where("email").ne(null).ne(""));
+        query.addCriteria(Criteria.where("email").regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"));
+//        query.addCriteria(Criteria.where("email").exists(true));
+//        query.addCriteria(Criteria.where("email").ne(null).ne(""));
         query.addCriteria(Criteria.where("sentimentAnalysis").is(true));
 
 
         // And this can be used for OR or AND condition in this way as well
+        /*
         Criteria criteria = new Criteria();
         query.addCriteria(criteria.orOperator(
                 Criteria.where("email").exists(true),
                 Criteria.where("sentimentAnalysis").is(true)
         ));
-
+        */
         return mongoTemplate.find(query, User.class);
     }
 }
