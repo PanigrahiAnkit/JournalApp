@@ -3,6 +3,7 @@ package com.myproject.journalApp.repository;
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.service.UserArgumentsProvider;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,6 +24,6 @@ public class UserRepositoryImplTests {
 
     @Test
     public void testSaveNewUser() {
-        userRepository.getUserForSA();
+        Assertions.assertNotNull(userRepository.getUserForSA());
     }
 }
