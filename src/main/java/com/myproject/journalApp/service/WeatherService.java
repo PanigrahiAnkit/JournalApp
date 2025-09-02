@@ -19,10 +19,11 @@ public class WeatherService {
     private String apiKey;
 
     private final RestTemplate restTemplate;
-
+    private final RedisService redisService;
     private final AppCache appCache;
 
     public WeatherResponse getWeather(String city) {
+        redisService.get("weather_of_" + city, WeatherResponse.class);
         String finalAPI = appCache
                 .appCache
                 .get(AppCache.keys.WEATHER_API.toString())
