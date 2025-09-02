@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -22,6 +24,14 @@ public class RedisService {
         } catch(Exception e) {
             log.error("Exception:  ", e);
             return null;
+        }
+    }
+
+    public void get(String key, Object o, Long ttl) { // ttl - time to live
+        try{
+            redisTemplate.opsForValue().set(key, o.toString(), ttl, TimeUnit.SECONDS);
+        } catch(Exception e) {
+            log.error("Exception:  ", e);
         }
     }
 }
