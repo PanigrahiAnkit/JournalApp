@@ -1,5 +1,6 @@
 package com.myproject.journalApp.entity;
 
+import com.myproject.journalApp.enums.Sentiment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,6 +23,7 @@ public class JournalEntry  { // POJO - Plain Old Java Object
     private String title;
     private String content;
     private LocalDateTime date;
+    private Sentiment sentiment;
 
 
 
