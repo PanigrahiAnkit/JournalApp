@@ -23,22 +23,31 @@ public class WeatherService {
     private final AppCache appCache;
 
     public WeatherResponse getWeather(String city) {
-        redisService.get("weather_of_" + city, WeatherResponse.class);
-        String finalAPI = appCache
-                .appCache
-                .get(AppCache.keys.WEATHER_API.toString())
-                .replace(Placeholders.CITY, city)
-                .replace(Placeholders.API_KEY, apiKey);
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null,
-                WeatherResponse.class);
-        if (response.getStatusCode() != HttpStatus.OK) {
-            throw new RuntimeException("Failed to fetch weather data. Status code: " + response.getStatusCode());
+        WeatherResponse weatherResponse = redisService.get("weather_of_" + city, WeatherResponse.class);
+        if(weatherResponse != null) {
+            return weatherResponse;
+        } else {
+            String finalAPI = appCache
+                    .appCache
+                    .get(AppCache.keys.WEATHER_API.toString())
+                    .replace(Placeholders.CITY, city)
+                    .replace(Placeholders.API_KEY, apiKey);
+
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null,
+                    WeatherResponse.class);
+            if (response.getStatusCode() != HttpStatus.OK) {
+                throw new RuntimeException("Failed to fetch weather data. Status code: " + response.getStatusCode());
+            }
+            // The process of converting JSON Response into corresponding Java Objects is known as Deserialisation.
+            WeatherResponse body = response.getBody();
+            if(body != null) {
+                redisService.set("weather_of_" + city, body, 300l);
+            }
+
+            if (body == null) {
+                throw new RuntimeException("Weather response body is empty");
+            }
+            return body;
         }
-        // The process of converting JSON Response into corresponding Java Objects is known as Deserialisation.
-        WeatherResponse body = response.getBody();
-        if (body == null) {
-            throw new RuntimeException("Weather response body is empty");
-        }
-        return body;
     }
 }
