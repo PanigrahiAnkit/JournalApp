@@ -21,7 +21,6 @@ public class UserScheduler {
 
     private final EmailService emailService;
     private final UserRepositoryImpl userRepository;
-    private final SentimentAnalysisService sentimentAnalysisService;
     private final AppCache appCache;
 
     @Scheduled(cron = "0 0 9 * * SUN")
