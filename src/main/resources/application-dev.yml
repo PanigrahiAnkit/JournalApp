@@ -9,7 +9,10 @@ spring:
       auto-index-creation: true
 
     redis:
-      uri: redis://default:PeFq3dMlfzdlZBdNluHudIapmVYZTxOd@redis-14046.c265.us-east-1-2.ec2.redns.redis-cloud.com:14046
+      host: redis-14046.c265.us-east-1-2.ec2.redns.redis-cloud.com
+      port: 14046
+      username: default
+      password: PeFq3dMlfzdlZBdNluHudIapmVYZTxOd
 
   main:
     allow-circular-references: true
