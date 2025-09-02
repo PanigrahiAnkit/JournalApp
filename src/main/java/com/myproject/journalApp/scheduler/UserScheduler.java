@@ -1,5 +1,6 @@
 package com.myproject.journalApp.scheduler;
 
+import com.myproject.journalApp.cache.AppCache;
 import com.myproject.journalApp.entity.JournalEntry;
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.repository.UserRepositoryImpl;
@@ -21,6 +22,7 @@ public class UserScheduler {
     private final EmailService emailService;
     private final UserRepositoryImpl userRepository;
     private final SentimentAnalysisService sentimentAnalysisService;
+    private final AppCache appCache;
 
     @Scheduled(cron = "0 0 9 * * SUN")
     public void fetchUsersAndSendMail() {
@@ -32,5 +34,10 @@ public class UserScheduler {
             String sentiment = sentimentAnalysisService.getSentiment(entry);
             emailService.sendEmail(user.getEmail(), "Sentiment for last 7 days", sentiment);
         }
+    }
+
+    @Scheduled(cron = "0 */5 * * * *") // every 5 minute
+    public void clearAppCache() {
+        appCache.init();
     }
 }
