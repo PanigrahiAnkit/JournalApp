@@ -9,7 +9,7 @@ spring:
       auto-index-creation: true
 
     redis:
-      uri: redis-cli -u redis://default:PeFq3dMlfzdlZBdNluHudIapmVYZTxOd@redis-14046.c265.us-east-1-2.ec2.redns.redis-cloud.com:14046
+      uri: redis://default:PeFq3dMlfzdlZBdNluHudIapmVYZTxOd@redis-14046.c265.us-east-1-2.ec2.redns.redis-cloud.com:14046
 
   main:
     allow-circular-references: true
