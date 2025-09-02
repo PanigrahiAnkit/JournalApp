@@ -15,6 +15,7 @@ public class UserRepositoryImpl {
 
     private final MongoTemplate mongoTemplate;
 
+    // SA - Sentiment Analysis
     public List<User> getUserForSA() {
         Query query = new Query();
 
