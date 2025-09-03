@@ -4,10 +4,12 @@ import com.myproject.journalApp.cache.AppCache;
 import com.myproject.journalApp.entity.JournalEntry;
 import com.myproject.journalApp.entity.User;
 import com.myproject.journalApp.enums.Sentiment;
+import com.myproject.journalApp.model.SentimentData;
 import com.myproject.journalApp.repository.UserRepositoryImpl;
 import com.myproject.journalApp.service.EmailService;
 import com.myproject.journalApp.service.SentimentAnalysisService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,7 @@ public class UserScheduler {
     private final EmailService emailService;
     private final UserRepositoryImpl userRepository;
     private final AppCache appCache;
+    private final KafkaTemplate<String, SentimentData> kafkaTemplate;
 
 //    @Scheduled(cron = "0 0 9 * * SUN")
     public void fetchUsersAndSendMail() {
