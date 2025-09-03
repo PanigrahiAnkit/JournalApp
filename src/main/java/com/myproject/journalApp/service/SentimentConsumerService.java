@@ -12,7 +12,7 @@ public class SentimentConsumerService {
     private final EmailService emailService;
 
     @KafkaListener(topics = "weekly-sentiments", groupId = "weekly-sentiment-group")
-    public void consume(SentimentData sentimentData) {
+    public void consume(SentimentData sentimentData) { // Deserialization
         sendEmail(sentimentData);
     }
 

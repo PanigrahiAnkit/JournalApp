@@ -33,16 +33,16 @@ spring:
     bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       group-id: weekly-sentiment-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring:
             json:
                 trusted:
-                  packages: "*"
+                  packages: com.myproject.journalApp.model
     properties:
       security:
         protocol: SASL_SSL
