@@ -13,14 +13,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
-import java.beans.JavaBean;
-
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableScheduling
 public class JournalApplication {
 
 	public static void main(String[] args) {
+		Dotenv dotenv = Dotenv.configure()
+				.directory("./")
+				.ignoreIfMalformed()
+				.ignoreIfMissing()
+				.load();
+
+		dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
 
 		ConfigurableApplicationContext context = SpringApplication.run(JournalApplication.class, args);
 		ConfigurableEnvironment environment = context.getEnvironment();
