@@ -57,8 +57,8 @@ spring:
 
 server:
   port: 8080
-  servlet:
-    context-path: /journal
+#  servlet:
+#    context-path: /journal
 
 weather:
   api:
