@@ -75,7 +75,7 @@ This project uses the following main technologies and dependencies:
 
 5. **API Endpoints**
    - By default, the application runs on `http://localhost:8080/`.
-   - API documentation (if enabled) can be found at `/swagger-ui.html` (requires Swagger dependency).
+   - API documentation can be found at `/swagger-ui.html` (requires Swagger dependency).
 
 ## Project Structure
 
