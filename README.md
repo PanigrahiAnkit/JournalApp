@@ -17,7 +17,7 @@ A secure, end-to-end encrypted (E2EE) Journal App built using Spring Boot and Mo
 - End-to-end encryption for journal entries
 - RESTful API with Spring Boot
 - MongoDB support for flexible data storage
-- Secure authentication and authorization (Spring Security)
+- Secure authentication and authorization (Spring Security with JWT)
 - Easy extensibility and maintainability
 
 ## Tech Stack & Versions
